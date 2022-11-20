@@ -1,0 +1,24 @@
+﻿@model List<Movie>
+
+<div class="sidebar">
+	<h2>Rating movies</h2>
+	<ul>
+
+		@for (int i = 0; i < Model.Count; i++)
+		{
+			<li>
+			@if (Model[i].Title == "Interstellar")
+			{
+				
+				<a asp-controller="Movies" asp-action="Watch" asp-route-index="@i">@Model[i].Title</a>
+			}
+			else
+			{
+				<a href="#">@Model[i].Title</a>
+			}
+			<span class="rating_sidebar">@string.Format("{0:0.0}", @Model[i].Rating)</span>
+			</li>
+		}
+
+	</ul>
+</div>

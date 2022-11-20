@@ -1,0 +1,65 @@
+﻿@model Movie
+
+@{
+	ViewData["Title"] = $"Movie {Model.Title}";
+
+	var reviews = ViewData["Reviews"] as List<Review>;
+}
+
+
+@section MenuBar {
+	<div class="menubar">
+
+		<ul class="menu">
+			<li><a asp-controller="Home" asp-action="Index">Home</a></li>
+			<li class="selected"><a asp-action="Index">Movies</a></li>
+			<li><a href="#">Series</a></li>
+			<li><a asp-controller="Rating" asp-action="Index">Rating movies</a></li>
+			<li><a asp-controller="Contact" asp-action="Index">Contacts</a></li>
+		</ul>
+
+	</div>
+}
+
+<div class="content">
+
+	<h1>@Model.Title</h1>
+
+	<iframe width="560" height="315" src="@Model.TrailerUrl" frameborder="0" allowfullscreen></iframe>
+
+	<div class="info_film_page">
+		<span class="label">rating: </span><span class="value">@Model.Rating / 10</span>
+		<span class="label">year: </span><span class="value">@Model.Date.Year</span>
+		<span class="label">producer: </span><span class="value">@Model.Producer</span>
+	</div>
+	<hr>
+	<h2>Description @Model.Title</h2>
+	<div class="descriptions_film">
+		<img src="~/images/@Model.ImageTitle">
+		@Model.Description
+	</div>
+
+	<hr>
+	<h2>Reviews about @Model.Title</h2>
+
+	@foreach (var item in reviews)
+	{
+		<div class="reviews">
+			<div class="review_name">
+				@item.UserName
+			</div>
+			<div class="review_text">
+				@item.Content
+			</div>
+		</div>
+	}
+
+	<div class="send">
+		<form method="post" action="#" id="review">
+			<input type="text" required="required" name="review_name" placeholder="Your name">
+			<textarea name="review_text" required="required"></textarea>
+			<input class="btn" type="submit" value="send">
+		</form>
+	</div>
+
+</div>

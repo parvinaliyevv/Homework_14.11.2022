@@ -1,0 +1,42 @@
+﻿@{
+	ViewData["Title"] = "Movies";
+
+	var movies = ViewData["Movies"] as List<Movie>;
+}
+
+@section MenuBar {
+	<div class="menubar">
+
+		<ul class="menu">
+			<li><a asp-controller="Home" asp-action="Index">Home</a></li>
+			<li class="selected"><a asp-action="Index">Movies</a></li>
+			<li><a href="#">Series</a></li>
+			<li><a asp-controller="Rating" asp-action="Index">Rating movies</a></li>
+			<li><a asp-controller="Contact" asp-action="Index">Contacts</a></li>
+		</ul>
+
+	</div>
+}
+
+<div class="content">
+
+	@for (int i = 0; i < movies.Count; i++)
+	{
+		<div class="info_film">
+			<img src="~/images/@movies[i].ImageTitle">
+			@movies[i].Description
+
+			<div class="button">
+				@if (movies[i].Title == "Interstellar")
+				{
+					<a asp-action="Watch" asp-route-index="@i">Watch</a>
+				}
+				else
+				{
+					<a href="#">Watch</a>
+				}
+			</div>
+		</div>
+	}
+
+</div>

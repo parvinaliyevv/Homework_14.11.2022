@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="movie, movie online, hd" />
+	<meta name="description" content="KinoMonster - is a portal about cinema" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="~/css/site.css"/>
+	<title>@ViewData["Title"]</title>
+</head>
+<body>
+
+	<header>
+		<div class="logo">
+			<div class="logo_text">
+				<h1><a asp-controller="Home" asp-action="Index">KinoMonster</a></h1>
+				<h2>Cinema - is our passion!</h2>
+			</div>
+		</div>
+
+		@RenderSection("MenuBar")
+	</header>
+
+	<main>
+		<div class="site_content">
+
+			<div class="sidebar_container">
+
+				@await Component.InvokeAsync("Search")
+
+				@await Component.InvokeAsync("Login")
+				
+				@await Component.InvokeAsync("New")
+
+				@await Component.InvokeAsync("Rating")
+
+			</div>
+
+			@RenderBody()
+
+		</div>
+	</main>
+
+	<footer>
+		<partial name="~/Views/Shared/PartialViews/FooterPartial.cshtml"/>
+	</footer>
+
+</body>
+</html>

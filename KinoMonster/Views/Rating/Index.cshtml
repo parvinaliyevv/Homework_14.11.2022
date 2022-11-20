@@ -1,0 +1,55 @@
+﻿@{
+	ViewData["Title"] = "Rating movies";
+
+	var movies = ViewData["Movies"] as List<Movie>;
+}
+
+@section MenuBar {
+	<div class="menubar">
+
+		<ul class="menu">
+			<li><a asp-controller="Home" asp-action="Index">Home</a></li>
+			<li><a asp-controller="Movies" asp-action="Index">Movies</a></li>
+			<li><a href="#">Series</a></li>
+			<li class="selected"><a asp-action="Index">Rating movies</a></li>
+			<li><a asp-controller="Contact" asp-action="Index">Contacts</a></li>
+		</ul>
+
+	</div>
+}
+
+<div class="content">
+
+	<table>
+
+		<tr>
+			<th></th>
+			<th>Movie</th>
+			<th class="center">Year</th>
+			<th class="center">Rating</th>
+		</tr>
+
+		@for (int i = 0; i < movies.Count; i++)
+		{
+			<tr>
+				<td class="center"><img src="~/images/@movies[i].ImageTitle"></td>
+
+				<td>@(i + 1). 
+				@if (movies[i].Title == "Interstellar")
+				{
+						<a asp-action="ShowMovie" asp-route-index="@i">@movies[i].Title</a>
+				}
+				else
+				{
+					<a href="#">@movies[i].Title</a>
+				}
+				</td>
+
+				<td class="center">@movies[i].Date.Year</td>
+				<td class="center rating">@string.Format("{0:0.0}", movies[i].Rating)</td>
+			</tr>
+		}
+
+	</table>
+
+</div>
